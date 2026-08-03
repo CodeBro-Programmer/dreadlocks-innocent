@@ -17,8 +17,8 @@
   font-size: 0.92rem;
   letter-spacing: 0.02em;
   white-space: nowrap;
-  transition: transform var(--dur-fast) var(--ease-luxe), box-shadow var(--dur-fast) var(--ease-luxe), background var(--dur-fast) var(--ease-luxe), color var(--dur-fast) var(--ease-luxe), border-color var(--dur-fast) var(--ease-luxe);
   position: relative;
+    transition: transform var(--dur-fast) var(--ease-luxe), box-shadow var(--dur-fast) var(--ease-luxe), background var(--dur-fast) var(--ease-luxe), color var(--dur-fast) var(--ease-luxe), border-color var(--dur-fast) var(--ease-luxe);
   isolation: isolate;
 }
 
