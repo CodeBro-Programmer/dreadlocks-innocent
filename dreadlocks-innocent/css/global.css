@@ -1,0 +1,291 @@
+/* ==========================================================================
+   GLOBAL — Design tokens, reset, base typography
+   Dreadlocks Innocent · Port Harcourt
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* ---- Color: warm, low-saturation luxury palette ---- */
+  --color-onyx: #14100d;          /* primary background */
+  --color-charcoal: #1d1712;      /* secondary background */
+  --color-charcoal-soft: #241c16; /* card surface */
+  --color-ivory: #f6f1e9;         /* primary text on dark */
+  --color-ivory-dim: #cbbfa9;     /* secondary text on dark */
+  --color-ink: #1b140f;           /* text on light surfaces */
+  --color-gold: #c9a227;          /* accent — brass gold */
+  --color-gold-bright: #e8c25e;   /* accent hover / highlight */
+  --color-umber: #8a5a35;         /* warm brown accent */
+  --color-olive: #454c34;         /* deep olive accent */
+  --color-line: rgba(246, 241, 233, 0.12);
+  --color-line-soft: rgba(246, 241, 233, 0.07);
+
+  /* ---- Gradients ---- */
+  --gradient-hero: linear-gradient(180deg, rgba(20, 16, 13, 0.35) 0%, rgba(20, 16, 13, 0.75) 60%, var(--color-onyx) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-bright) 50%, var(--color-umber) 100%);
+  --gradient-card: linear-gradient(160deg, rgba(246, 241, 233, 0.06) 0%, rgba(246, 241, 233, 0.015) 100%);
+
+  /* ---- Type ---- */
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+
+  --fs-eyebrow: 0.72rem;
+  --fs-body: 1rem;
+  --fs-lead: 1.15rem;
+  --fs-h6: 1.1rem;
+  --fs-h5: 1.4rem;
+  --fs-h4: 1.9rem;
+  --fs-h3: 2.4rem;
+  --fs-h2: clamp(2.4rem, 4.5vw, 3.6rem);
+  --fs-h1: clamp(2.8rem, 6.5vw, 5.4rem);
+
+  /* ---- Spacing scale ---- */
+  --space-2xs: 0.4rem;
+  --space-xs: 0.8rem;
+  --space-sm: 1.2rem;
+  --space-md: 2rem;
+  --space-lg: 3.2rem;
+  --space-xl: 5.2rem;
+  --space-2xl: 8rem;
+
+  /* ---- Layout ---- */
+  --container-max: 1240px;
+  --container-pad: clamp(1.25rem, 4vw, 3rem);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* ---- Motion ---- */
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.25s;
+  --dur-med: 0.6s;
+  --dur-slow: 1s;
+
+  /* ---- Shadow ---- */
+  --shadow-soft: 0 20px 60px -20px rgba(0, 0, 0, 0.55);
+  --shadow-gold: 0 10px 40px -10px rgba(201, 162, 39, 0.35);
+
+  color-scheme: dark;
+}
+
+/* Light mode override (toggle adds this class to <html>) */
+html.theme-light {
+  --color-onyx: #f6f1e9;
+  --color-charcoal: #ece3d2;
+  --color-charcoal-soft: #ffffff;
+  --color-ivory: #1b140f;
+  --color-ivory-dim: #5b4d3d;
+  --color-line: rgba(27, 20, 15, 0.12);
+  --color-line-soft: rgba(27, 20, 15, 0.06);
+  --gradient-card: linear-gradient(160deg, rgba(27, 20, 15, 0.05) 0%, rgba(27, 20, 15, 0.01) 100%);
+  color-scheme: light;
+}
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-onyx);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color var(--dur-med) var(--ease-luxe), color var(--dur-med) var(--ease-luxe);
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---- Base typography ---- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--color-ivory);
+}
+
+h1 { font-size: var(--fs-h1); font-weight: 400; }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
+
+p {
+  color: var(--color-ivory-dim);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  color: var(--color-ivory-dim);
+}
+
+em {
+  font-style: italic;
+  color: var(--color-gold-bright);
+}
+
+/* ---- Layout helpers ---- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--space-2xl);
+}
+
+.section--tight {
+  padding-block: var(--space-xl);
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: var(--space-lg);
+}
+
+.section-head--center {
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-sm);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--color-gold);
+  display: inline-block;
+}
+
+.text-gold { color: var(--color-gold); }
+.text-dim { color: var(--color-ivory-dim); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: var(--space-md);
+  background: var(--color-gold);
+  color: var(--color-ink);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  z-index: 999;
+  font-weight: 700;
+  transition: top var(--dur-fast) var(--ease-luxe);
+}
+
+.skip-link:focus {
+  top: var(--space-md);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- Utility classes (replace one-off inline styles) ---- */
+.section--charcoal { background: var(--color-charcoal); }
+.measure-xl { max-width: 760px; }
+.measure-lg { max-width: 560px; }
+.measure-md { max-width: 520px; }
+.measure-sm { max-width: 460px; }
+.center-inline { margin-inline: auto; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.mt-0 { margin-top: 0; }
+.mt-xs { margin-top: 0.4rem; }
+.mt-sm { margin-top: 0.75rem; }
+.mt-md { margin-top: 1rem; }
+.mt-lg { margin-top: 2rem; }
+.mb-0 { margin-bottom: 0; }
+.fs-sm { font-size: 0.9rem; }
+.ratio-portrait { aspect-ratio: 3 / 4; }
+.rounded-md { border-radius: var(--radius-md); }
+.justify-center { justify-content: center; }
+.link-inherit { color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+

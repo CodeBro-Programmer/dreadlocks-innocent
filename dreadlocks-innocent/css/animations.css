@@ -1,0 +1,169 @@
+/* ==========================================================================
+   ANIMATIONS — keyframes, reveal states, loader, floating elements
+   Actual timelines are driven by js/animations.js (GSAP). These classes
+   define the *resting* states so content doesn't flash unstyled before
+   GSAP attaches, and hold pure-CSS motion (loader, floating, marquee).
+   ========================================================================== */
+
+/* ---- Preloader ---- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--color-onyx);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.preloader-mark {
+  width: 64px;
+  height: 64px;
+  color: var(--color-gold);
+}
+
+.preloader-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.preloader-bar {
+  width: 180px;
+  height: 1px;
+  background: var(--color-line);
+  position: relative;
+  overflow: hidden;
+}
+
+.preloader-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: var(--color-gold);
+}
+
+.preloader.is-loading .preloader-bar::after {
+  animation: preload-fill 1.2s var(--ease-luxe) forwards;
+}
+
+@keyframes preload-fill {
+  to { transform: scaleX(1); }
+}
+
+.preloader-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-ivory-dim);
+}
+
+/* ---- Scroll-reveal resting states (GSAP animates from these) ---- */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(48px);
+}
+
+.reveal-fade {
+  opacity: 0;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+.reveal-text {
+  overflow: hidden;
+}
+
+.reveal-text > * {
+  transform: translateY(110%);
+  display: inline-block;
+}
+
+.reveal-image {
+  overflow: hidden;
+}
+
+.reveal-image img,
+.reveal-image .placeholder-art {
+  transform: scale(1.18);
+}
+
+/* When JS is disabled, ensure content is still visible */
+.no-js .reveal-up,
+.no-js .reveal-fade,
+.no-js .reveal-scale {
+  opacity: 1;
+  transform: none;
+}
+
+.no-js .reveal-text > * {
+  transform: none;
+}
+
+/* ---- Floating elements ---- */
+.float-slow {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+.float-med {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+.float-delay {
+  animation-delay: 1.2s;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+.spin-slow {
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Hero background drift ---- */
+.hero-bg {
+  animation: hero-drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes hero-drift {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+
+/* ---- Button shine sweep ---- */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.35) 50%, transparent 80%);
+  transform: translateX(-100%);
+  z-index: -1;
+}
+
+.btn-primary:hover::after {
+  animation: shine-sweep 1s var(--ease-luxe);
+}
+
+@keyframes shine-sweep {
+  to { transform: translateX(100%); }
+}
+
+/* ---- Skeleton shimmer (used before content settles, optional) ---- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
